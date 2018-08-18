@@ -51,8 +51,7 @@ namespace MotorApp.WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Motors.Add(motor);
-                db.SaveChanges();
+                db.Add(motor);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +65,7 @@ namespace MotorApp.WebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Motor motor = db.Motors.Find(id);
+            Motor motor = db.FindById(Convert.ToInt32(id));
             if (motor == null)
             {
                 return HttpNotFound();
@@ -83,8 +82,7 @@ namespace MotorApp.WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(motor).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Edit(motor);
                 return RedirectToAction("Index");
             }
             return View(motor);
@@ -97,7 +95,7 @@ namespace MotorApp.WebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Motor motor = db.Motors.Find(id);
+            Motor motor = db.FindById(Convert.ToInt32(id));
             if (motor == null)
             {
                 return HttpNotFound();
@@ -110,9 +108,7 @@ namespace MotorApp.WebClient.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Motor motor = db.Motors.Find(id);
-            db.Motors.Remove(motor);
-            db.SaveChanges();
+            db.Remove(id);
             return RedirectToAction("Index");
         }
 
@@ -120,7 +116,7 @@ namespace MotorApp.WebClient.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+               // db.Dispose();
             }
             base.Dispose(disposing);
         }
