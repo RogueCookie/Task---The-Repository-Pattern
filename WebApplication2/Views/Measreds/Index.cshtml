@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication2.Models.Measred>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Time_of_measurement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actual_current__A_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actual_revs___rpm_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actual_pressure__bar_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListMotor.Motor_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time_of_measurement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actual_current__A_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actual_revs___rpm_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actual_pressure__bar_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ListMotor.Motor_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -10,107 +10,112 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-    public class ListMotorsController : Controller
+    public class MeasredsController : Controller
     {
         private DbTaskEntities db = new DbTaskEntities();
 
-        // GET: ListMotors
+        // GET: Measreds
         public ActionResult Index()
         {
-            return View(db.ListMotors.ToList());
+            var measreds = db.Measreds.Include(m => m.ListMotor);
+            return View(measreds.ToList());
         }
 
-        // GET: ListMotors/Details/5
+        // GET: Measreds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ListMotor listMotor = db.ListMotors.Find(id);
-            if (listMotor == null)
+            Measred measred = db.Measreds.Find(id);
+            if (measred == null)
             {
                 return HttpNotFound();
             }
-            return View(listMotor);
+            return View(measred);
         }
 
-        // GET: ListMotors/Create
+        // GET: Measreds/Create
         public ActionResult Create()
         {
+            ViewBag.MotorsId = new SelectList(db.ListMotors, "Id", "Motor_Name");
             return View();
         }
 
-        // POST: ListMotors/Create
+        // POST: Measreds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Motor_Name,Type,Max_power__kW_,Voltage__V_,Current__A_,Fuel_consumtion_per_hour_l_h_,Max_torque_at__rpm_,Max_presure__bar_,Displacement__cm3_rev_")] ListMotor listMotor)
+        public ActionResult Create([Bind(Include = "Id,Time_of_measurement,Actual_current__A_,Actual_revs___rpm_,Actual_pressure__bar_,MotorsId")] Measred measred)
         {
             if (ModelState.IsValid)
             {
-                db.ListMotors.Add(listMotor);
+                db.Measreds.Add(measred);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(listMotor);
+            ViewBag.MotorsId = new SelectList(db.ListMotors, "Id", "Motor_Name", measred.MotorsId);
+            return View(measred);
         }
 
-        // GET: ListMotors/Edit/5
+        // GET: Measreds/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ListMotor listMotor = db.ListMotors.Find(id);
-            if (listMotor == null)
+            Measred measred = db.Measreds.Find(id);
+            if (measred == null)
             {
                 return HttpNotFound();
             }
-            return View(listMotor);
+            ViewBag.MotorsId = new SelectList(db.ListMotors, "Id", "Motor_Name", measred.MotorsId);
+            return View(measred);
         }
 
-        // POST: ListMotors/Edit/5
+        // POST: Measreds/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Motor_Name,Type,Max_power__kW_,Voltage__V_,Current__A_,Fuel_consumtion_per_hour_l_h_,Max_torque_at__rpm_,Max_presure__bar_,Displacement__cm3_rev_")] ListMotor listMotor)
+        public ActionResult Edit([Bind(Include = "Id,Time_of_measurement,Actual_current__A_,Actual_revs___rpm_,Actual_pressure__bar_,MotorsId")] Measred measred)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(listMotor).State = EntityState.Modified;
+                db.Entry(measred).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(listMotor);
+            ViewBag.MotorsId = new SelectList(db.ListMotors, "Id", "Motor_Name", measred.MotorsId);
+            return View(measred);
         }
 
-        // GET: ListMotors/Delete/5
+        // GET: Measreds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ListMotor listMotor = db.ListMotors.Find(id);
-            if (listMotor == null)
+            Measred measred = db.Measreds.Find(id);
+            if (measred == null)
             {
                 return HttpNotFound();
             }
-            return View(listMotor);
+            return View(measred);
         }
 
-        // POST: ListMotors/Delete/5
+        // POST: Measreds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ListMotor listMotor = db.ListMotors.Find(id);
-            db.ListMotors.Remove(listMotor);
+            Measred measred = db.Measreds.Find(id);
+            db.Measreds.Remove(measred);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

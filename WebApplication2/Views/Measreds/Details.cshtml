@@ -1,0 +1,58 @@
+﻿@model WebApplication2.Models.Measred
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Measred</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Time_of_measurement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time_of_measurement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actual_current__A_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actual_current__A_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actual_revs___rpm_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actual_revs___rpm_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actual_pressure__bar_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actual_pressure__bar_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ListMotor.Motor_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ListMotor.Motor_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

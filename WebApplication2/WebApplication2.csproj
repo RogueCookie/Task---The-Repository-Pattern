@@ -156,7 +156,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ListMotorsController.cs" />
+    <Compile Include="Controllers\MeasredsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -244,6 +244,11 @@
     <Content Include="Views\ListMotors\Details.cshtml" />
     <Content Include="Views\ListMotors\Edit.cshtml" />
     <Content Include="Views\ListMotors\Index.cshtml" />
+    <Content Include="Views\Measreds\Create.cshtml" />
+    <Content Include="Views\Measreds\Delete.cshtml" />
+    <Content Include="Views\Measreds\Details.cshtml" />
+    <Content Include="Views\Measreds\Edit.cshtml" />
+    <Content Include="Views\Measreds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
