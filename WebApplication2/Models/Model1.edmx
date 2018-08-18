@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbTaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ListMotors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Motor Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Max power (kW)" Type="int" Nullable="false" />
+          <Property Name="Voltage (V)" Type="int" />
+          <Property Name="Current (A)" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fuel consumtion per hour(l/h)" Type="int" />
+          <Property Name="Max torque at (rpm)" Type="int" />
+          <Property Name="Max presure (bar)" Type="int" />
+          <Property Name="Displacement (cm3/rev)" Type="int" />
+        </EntityType>
+        <EntityType Name="Measred">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Time of measurement" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Actual current (A)" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Actual revs. (rpm)" Type="int" />
+          <Property Name="Actual pressure (bar)" Type="int" />
+          <Property Name="MotorsId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Measured_ListMotors">
+          <End Role="ListMotors" Type="Self.ListMotors" Multiplicity="0..1" />
+          <End Role="Measred" Type="Self.Measred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListMotors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measred">
+              <PropertyRef Name="MotorsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTaskModelStoreContainer">
+          <EntitySet Name="ListMotors" EntityType="Self.ListMotors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measred" EntityType="Self.Measred" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Measured_ListMotors" Association="Self.FK_Measured_ListMotors">
+            <End Role="ListMotors" EntitySet="ListMotors" />
+            <End Role="Measred" EntitySet="Measred" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTaskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ListMotor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Motor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Max_power__kW_" Type="Int32" Nullable="false" />
+          <Property Name="Voltage__V_" Type="Int32" />
+          <Property Name="Current__A_" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fuel_consumtion_per_hour_l_h_" Type="Int32" />
+          <Property Name="Max_torque_at__rpm_" Type="Int32" />
+          <Property Name="Max_presure__bar_" Type="Int32" />
+          <Property Name="Displacement__cm3_rev_" Type="Int32" />
+          <NavigationProperty Name="Measreds" Relationship="Self.FK_Measured_ListMotors" FromRole="ListMotors" ToRole="Measred" />
+        </EntityType>
+        <EntityType Name="Measred">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Time_of_measurement" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Actual_current__A_" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Actual_revs___rpm_" Type="Int32" />
+          <Property Name="Actual_pressure__bar_" Type="Int32" />
+          <Property Name="MotorsId" Type="Int32" />
+          <NavigationProperty Name="ListMotor" Relationship="Self.FK_Measured_ListMotors" FromRole="Measred" ToRole="ListMotors" />
+        </EntityType>
+        <Association Name="FK_Measured_ListMotors">
+          <End Role="ListMotors" Type="Self.ListMotor" Multiplicity="0..1" />
+          <End Role="Measred" Type="Self.Measred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListMotors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measred">
+              <PropertyRef Name="MotorsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTaskEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ListMotors" EntityType="Self.ListMotor" />
+          <EntitySet Name="Measreds" EntityType="Self.Measred" />
+          <AssociationSet Name="FK_Measured_ListMotors" Association="Self.FK_Measured_ListMotors">
+            <End Role="ListMotors" EntitySet="ListMotors" />
+            <End Role="Measred" EntitySet="Measreds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTaskModelStoreContainer" CdmEntityContainer="DbTaskEntities">
+          <EntitySetMapping Name="ListMotors">
+            <EntityTypeMapping TypeName="DbTaskModel.ListMotor">
+              <MappingFragment StoreEntitySet="ListMotors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Motor_Name" ColumnName="Motor Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Max_power__kW_" ColumnName="Max power (kW)" />
+                <ScalarProperty Name="Voltage__V_" ColumnName="Voltage (V)" />
+                <ScalarProperty Name="Current__A_" ColumnName="Current (A)" />
+                <ScalarProperty Name="Fuel_consumtion_per_hour_l_h_" ColumnName="Fuel consumtion per hour(l/h)" />
+                <ScalarProperty Name="Max_torque_at__rpm_" ColumnName="Max torque at (rpm)" />
+                <ScalarProperty Name="Max_presure__bar_" ColumnName="Max presure (bar)" />
+                <ScalarProperty Name="Displacement__cm3_rev_" ColumnName="Displacement (cm3/rev)" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measreds">
+            <EntityTypeMapping TypeName="DbTaskModel.Measred">
+              <MappingFragment StoreEntitySet="Measred">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Time_of_measurement" ColumnName="Time of measurement" />
+                <ScalarProperty Name="Actual_current__A_" ColumnName="Actual current (A)" />
+                <ScalarProperty Name="Actual_revs___rpm_" ColumnName="Actual revs. (rpm)" />
+                <ScalarProperty Name="Actual_pressure__bar_" ColumnName="Actual pressure (bar)" />
+                <ScalarProperty Name="MotorsId" ColumnName="MotorsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
