@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MotorApp.BuisnessLogic;
+using MotorApp.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,24 @@ namespace MotorApp.UnitTest
             Assert.IsNotNull(result);
             var numberOfRecords = result.ToList().Count;
             Assert.AreEqual(3, numberOfRecords);
+        }
+
+        [TestMethod]
+        public void IsRepositoryAddMotor()
+        {
+            Motor motorToInsert = new Motor
+            {
+                Id = 3,
+                TimeStamp = Convert.ToDateTime("10:00:00"),
+                MotorName = "Motor 3",
+                Pressure = 160
+            };
+
+            Repo.Add(motorToInsert);
+            //if motor inserted successfully, number of records will increase to 3
+            var result = Repo.GetMotors();
+            var numberOfRecords = result.ToList().Count;
+            Assert.AreEqual(7, numberOfRecords);
         }
     }
 }
