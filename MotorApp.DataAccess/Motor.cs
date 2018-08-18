@@ -20,10 +20,10 @@ namespace MotorApp.DataAccess
         public string MotorName { get; set; }
 
         [Required]
-        public decimal Current { get; set; }
+        public double Current { get; set; }
 
         
-        public decimal DifferenceC { get; set; }
+        public double DifferenceC { get; set; }
 
         [Required]
         public int Revs { get; set; }
