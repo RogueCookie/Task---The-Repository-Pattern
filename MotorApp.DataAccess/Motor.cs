@@ -19,18 +19,18 @@ namespace MotorApp.DataAccess
         [MaxLength(100)]
         public string MotorName { get; set; }
 
-        //[Required]
+        [Required]
         public double Current { get; set; }
 
         
         public double DifferenceC { get; set; }
-
-        //[Required]
+    
+        [Required]
         public int Revs { get; set; }
 
         public int DifferenceR { get; set; }
 
-        //[Required]
+        [Required]
         public int Pressure { get; set; }
 
         public int DifferenceP { get; set; }
