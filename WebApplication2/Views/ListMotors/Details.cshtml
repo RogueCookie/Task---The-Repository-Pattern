@@ -1,0 +1,90 @@
+﻿@model WebApplication2.Models.ListMotor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ListMotor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Motor_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motor_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Max_power__kW_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Max_power__kW_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voltage__V_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voltage__V_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current__A_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current__A_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuel_consumtion_per_hour_l_h_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fuel_consumtion_per_hour_l_h_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Max_torque_at__rpm_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Max_torque_at__rpm_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Max_presure__bar_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Max_presure__bar_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Displacement__cm3_rev_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Displacement__cm3_rev_)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
