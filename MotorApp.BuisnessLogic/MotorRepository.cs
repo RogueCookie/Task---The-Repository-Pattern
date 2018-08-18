@@ -9,29 +9,37 @@ namespace MotorApp.BuisnessLogic
 {
     public class MotorRepository : IMotorRepository
     {
+        MotorContext context = new MotorContext();
+
         public void Add(Motor p)
         {
-            throw new NotImplementedException();
+            context.Motors.Add(p);
+            context.SaveChanges();
         }
 
         public void Edit(Motor p)
         {
-            throw new NotImplementedException();
+            context.Entry(p).State = System.Data.Entity.EntityState.Modified;
         }
 
         public Motor FindById(int Id)
         {
-            throw new NotImplementedException();
+            var result = (from r in context.Motors
+                          where r.Id == Id
+                          select r).FirstOrDefault();
+            return result;
         }
 
         public IEnumerable<Motor> GetMotors()
         {
-            throw new NotImplementedException();
+            return context.Motors;
         }
 
         public void Remove(int Id)
         {
-            throw new NotImplementedException();
+            Motor p = context.Motors.Find(Id);
+            context.Motors.Remove(p);
+            context.SaveChanges();
         }
     }
 }
