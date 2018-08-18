@@ -26,7 +26,7 @@ namespace MotorApp.UnitTest
             var result = Repo.GetMotors();
             Assert.IsNotNull(result);
             var numberOfRecords = result.ToList().Count;
-            Assert.AreEqual(2, numberOfRecords);
+            Assert.AreEqual(3, numberOfRecords);
         }
     }
 }
