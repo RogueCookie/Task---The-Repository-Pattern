@@ -14,6 +14,7 @@ namespace MotorApp.DataAccess
         public DateTime TimeStamp { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string MotorName { get; set; }
 
         public decimal Current { get; set; }
